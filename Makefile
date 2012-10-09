@@ -1,7 +1,5 @@
-
-
-
-
+INTERFACE = ffinterface.sv
+TOP = top.sv
 
 
 
@@ -24,5 +22,7 @@ indent:
 
 bench:
 
+test:
+	vcs -PP -sverilog +define+SV +define+VPD $() $()
 clean:
 
