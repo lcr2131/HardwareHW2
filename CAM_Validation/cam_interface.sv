@@ -10,9 +10,9 @@ interface cam_interface(input bit clk);
    	logic 			search_enable_i; 
 	logic [31 : 0 ] 	search_data_i;   
 	logic			read_valid_o;
-	logic [31 : 0] 	read_value_o;
+	logic [31 : 0] 		read_value_o;
 	logic 			search_valid_o;
-	logic [4 : 0 ] 	search_index_o;
+	logic [4 : 0 ] 		search_index_o;
 
 	clocking cb @(posedge clk);
 		output 			clk_i,
