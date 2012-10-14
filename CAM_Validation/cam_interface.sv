@@ -51,6 +51,9 @@ interface cam_interface(input bit clk);
 		output [4 : 0 ] 	search_index_o  
    	); 
 
+   modport dut_decoder(input write_enable_i, input [31:0] write_index_i, output logic [] write_enable_o);
+   
+   
 	modport bench_cam(clocking cb);
 
 endinterface
