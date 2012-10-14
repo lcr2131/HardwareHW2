@@ -14,21 +14,21 @@ interface cam_interface(input bit clk);
 	logic 			search_valid_o;
 	logic [4 : 0 ] 	search_index_o;
 
-	clocking cb (@posedge clk)
-		output 			clk_i; 
-		output 			rst_i;
-		output 			read_enable_i; 
-		output [4 : 0 ] 	read_index_i;
-		output 			write_enable_i;
-		output [4 : 0 ] 		write_index_i;
-		output [31 : 0 ] 	write_data_i;
-   		output 			search_enable_i; 
-		output [31 : 0 ] 	search_data_i;  
+	clocking cb @(posedge clk);
+		output 			clk_i,
+		 			rst_i,
+		 			read_enable_i, 
+					read_index_i,
+					write_enable_i,
+					write_index_i,
+		 			write_data_i,
+   		 			search_enable_i, 
+				 	search_data_i;  
  
-		input logic		read_valid_o;
-		input [31 : 0] 	read_value_o;
-		input 			search_valid_o;
-		input [4 : 0 ] 	search_index_o;
+		input 			read_valid_o,
+		 		 	read_value_o,
+					search_valid_o,
+		 		 	search_index_o;
 
 	endclocking
 
@@ -39,16 +39,16 @@ interface cam_interface(input bit clk);
 		input 			clk_i, 
 		input 			rst_i,
 		input 			read_enable_i, 
-		input [4 : 0 ] 		read_index_i,
+		input 			read_index_i,
 		input 			write_enable_i,
-		input [4 : 0 ] 		write_index_i,
-		input [31 : 0 ] 	write_data_i,
+		input 	 		write_index_i,
+		input  		 	write_data_i,
    		input 			search_enable_i, 
-		input [31 : 0 ] 	search_data_i,   
-		output logic		read_valid_o,
-		output [31 : 0] 	read_value_o,
+		input 		 	search_data_i,   
+		output			read_valid_o,
+		output 		 	read_value_o,
 		output 			search_valid_o,
-		output [4 : 0 ] 	search_index_o  
+		output 			search_index_o  
    	); 
 
    modport dut_decoder(input write_enable_i, input [31:0] write_index_i, output logic [] write_enable_o);
