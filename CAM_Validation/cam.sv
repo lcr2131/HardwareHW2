@@ -3,7 +3,7 @@
 // Date Created: September 25, 2012
 // Date Modified: October 2, 2012
 
-module cam  (caminterface.dut d);   
+module cam  (cam_interface.dut_cam d);   
    //Put inputs on wires inside of the CAM
    wire [4 : 0 ] 	read_index;
    wire [4 : 0] 	dec_write_enable;
@@ -18,7 +18,7 @@ module cam  (caminterface.dut d);
    logic [31 : 0] 	readlogic;
    
    //Decoder
-   cam_decoder decoder(.*,.write_enable_o(dec_write_enable));//Not sure if I can d.*?
+   cam_decoder decoder(.*,.d.write_enable_o(dec_write_enable));//Not sure if I can d.*?
    
    //Memory Generation
    generate 

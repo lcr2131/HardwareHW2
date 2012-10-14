@@ -9,6 +9,6 @@ module flipflop(iffc.dut d);
    always_comb begin
       d.match_o = d.search_enable_i & (d.search_i == d.data_o);
    end
-  
+   
 endmodule
 
