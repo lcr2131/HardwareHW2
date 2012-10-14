@@ -18,7 +18,7 @@ module cam  (cam_interface.dut_cam d);
    logic [31 : 0] 	readlogic;
    
    //Decoder
-   cam_decoder decoder(.*,.write_enable_o(dec_write_enable));//Not sure if I can d.*?
+   cam_decoder decoder(.*,.d.write_enable_o(dec_write_enable));//Not sure if I can d.*?
    
    //Memory Generation
    generate 
