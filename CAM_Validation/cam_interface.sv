@@ -1,18 +1,18 @@
 interface cam_interface(input bit clk);
 
-	input 			clk_i; 
-	input 			rst_i;
-	input 			read_enable_i; 
-	input [4 : 0 ] 		read_index_i;
-	input 			write_enable_i;
-	input [4 : 0 ] 		write_index_i;
-	input [31 : 0 ] 	write_data_i;
-   	input 			search_enable_i; 
-	input [31 : 0 ] 	search_data_i;   
-	output logic		read_valid_o;
-	output [31 : 0] 	read_value_o;
-	output 			search_valid_o;
-	output [4 : 0 ] 	search_index_o;
+	logic 			clk_i; 
+	logic 			rst_i;
+	logic 			read_enable_i; 
+	logic [4 : 0 ] 		read_index_i;
+	logic 			write_enable_i;
+	logic [4 : 0 ] 		write_index_i;
+	logic [31 : 0 ] 	write_data_i;
+   	logic 			search_enable_i; 
+	logic [31 : 0 ] 	search_data_i;   
+	logic			read_valid_o;
+	logic [31 : 0] 	read_value_o;
+	logic 			search_valid_o;
+	logic [4 : 0 ] 	search_index_o;
 
 	clocking cb (@posedge clk)
 		output 			clk_i; 
