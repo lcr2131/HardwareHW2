@@ -11,9 +11,7 @@ help:
 	echo " bench - builds the testbench";\
 	echo " indent - indents verilog and c files.  lazy man's tab.  everyone should have one.";\
 	echo " clean - cleans testbench and associated files":\
-	ecbo " help - displays this help file";\
-
-
+	echo " help - displays this help file";\
 
 indent:
 	emacs --batch *.sv -f verilog-batch-indent
@@ -25,4 +23,4 @@ bench:
 test:
 	vcs -PP -sverilog +define+SV +define+VPD $() $()
 clean:
-
+	rm -rf *~
