@@ -9,32 +9,32 @@ class reset;
 
 
 
-   endfunction //
+   endfunction // program
 
    function void checkbits;
       
 
    endfunction //
 
-end class // UNMATCHED !!
+endclass // reset
+
 
 class rw;
 
 
    function void golden_result;
 
+   endfunction // program
+   
 
-
-
-         endfunction //
 
    function void checkbits;
 
+   endfunction // testbench
+   
 
+endclass // rw
 
-         endfunction //
-
-end class // UNMATCHED !!
 
 class search;
 
@@ -53,10 +53,11 @@ class search;
 
          endfunction //
 
-   end class // UNMATCHED !!
+endclass // search
 
    
-program()
+program testbench ();
+   
    
    reset;
    rw;
@@ -70,7 +71,8 @@ program()
    end // end initial
  
    
-endprogram
+endprogram 
+   
      
    
    
