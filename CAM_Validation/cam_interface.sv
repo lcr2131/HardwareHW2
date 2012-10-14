@@ -52,6 +52,11 @@ interface cam_interface(input bit clk);
    	); 
 
    modport dut_decoder(input write_enable_i, input [31:0] write_index_i, output logic [] write_enable_o);
+
+   modport dut_flipflop();
+   modport dut_row();
+
+   
    
    
 	modport bench_cam(clocking cb);
