@@ -1,4 +1,5 @@
 interface cam_interface(input bit clk);
+
 	input 			clk_i; 
 	input 			rst_i;
 	input 			read_enable_i; 
