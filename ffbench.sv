@@ -1,16 +1,15 @@
 //Author: Leonard Robinson
 class flippy;
-   rand int a;
-   rand int b;
+   rand int value;
    int out;
 
 	function void golden_result;
-	  
-	   $display();
+	   out = value;	   
+	   $display("%t : %s \n", $realtime, "Computing Golden Result");
 	endfunction
 
 	function bit check_result(int x);
-		return (x == output);
+		return (x == out);
 	endfunction
 end class
 
