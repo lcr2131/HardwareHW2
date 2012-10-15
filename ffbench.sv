@@ -13,15 +13,15 @@ class flippy;
    endfunction
 endclass
 
-   program (iffc.bench x) //iffc is the interface of the flip flop class
-     flippy f;
+program tb (iffc.bench x); //iffc is the interface of the flip flop class
+  flippy f;
    initial begin
       repeat (10000) begin
 
 	 f = new();
 	 f.randomize();
 	 // Drive Inputs for Next Cycle
-	 $display()P;
+	 $display();
 	 @(x.cb);
 	 f.golden_result();
 	 
