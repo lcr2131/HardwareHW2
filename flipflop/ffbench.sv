@@ -1,7 +1,10 @@
 //Author: Leonard Robinson
 class flip_flop_in;
 	rand bit rst;
-	rand int data_i;
+	rand int write_data_i;
+   rand bit search_data_i;
+   rand int search_enable_i;
+   rand bit write_enable_i;
 endclass
 
 class flip_flop_test;
