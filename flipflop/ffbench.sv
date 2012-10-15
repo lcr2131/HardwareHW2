@@ -1,16 +1,36 @@
 //Author: Leonard Robinson
-class flippy;
-   rand int value;
-   int out;
+class flip_flop_in;
+	rand bit rst;
+	rand int data_i;
+endclass
+
+class flip_flop_test;
+   int value;
+   
+	int data_o;
 
    function void golden_result;
       out = value;	   
       $display("%t : %s \n", $realtime, "Computing Golden Result");
    endfunction
+endclass
 
+
+class flip_flip_check;
    function bit check_result(int x);
       return (x == out);
    endfunction
+endclass
+
+
+class flip_flop_env; //Flip Flop parameter environment
+	
+	
+
+	function
+
+	endfunction
+
 endclass
 
 program tb (iffc.bench x); //iffc is the interface of the flip flop class
