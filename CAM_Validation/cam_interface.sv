@@ -149,7 +149,7 @@ interface cam_interface(input bit clk);
    
    modport dut_thirtyTwoToOne(input thirtyTwoToOne_input_lines, input thirtyTwoToOne_selector_bits, output thirtyTwoToOne_output_line);
    
-   modport dut_thirtTwoByThirtyTwo(input thirtyTwoByThirtyTwo_input_lines, input thirtyTwoByThirtyTwo_selector_bits, output thirtyTwoByThirtyTwo_output_line);
+   modport dut_thirtyTwoByThirtyTwo(input thirtyTwoByThirtyTwo_input_lines, input thirtyTwoByThirtyTwo_selector_bits, output thirtyTwoByThirtyTwo_output_line);
    
    modport dut_flipflop(
 			input  clk_i,
