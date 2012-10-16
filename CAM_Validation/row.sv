@@ -4,19 +4,19 @@
 // Date Modified: September 30, 2012
 
 module row #(parameter WIDTH=32)
-   (
-    input 		   clk,
-    input 		   reset, 
-    input [WIDTH-1:0] 	   data_i,
-    input 		   write_enable_i,
-    input 		   search_enable_i,
-    input [WIDTH-1:0] 	   search_data_i,
-    output reg [WIDTH-1:0] data_o,
-    output 		   match_o,
-    output reg 		   read_valid_o 		
-    );
+(
+ input 			clk,
+ input 			reset, 
+ input [WIDTH-1:0] 	data_i,
+ input 			write_enable_i,
+ input 			search_enable_i,
+ input [WIDTH-1:0] 	search_data_i,
+ output reg [WIDTH-1:0] data_o,
+ output 		match_o,
+ output reg 		read_valid_o 		
+);
 
-   logic [WIDTH-1:0] 	   match;
+   logic [WIDTH-1:0]      match;
 
    always_ff @(posedge clk) begin
       if (reset) read_valid_o <= '0;
@@ -33,7 +33,7 @@ module row #(parameter WIDTH=32)
                          .search_i(search_data_i[j]),
                          .data_o(data_o[j]),
                          .match_o(match[j])
-                         );
+                        );
       end                
    endgenerate
 
@@ -43,6 +43,6 @@ module row #(parameter WIDTH=32)
       combined = &match;
    end
    assign match_o = combined;
-   
+    
 endmodule
 

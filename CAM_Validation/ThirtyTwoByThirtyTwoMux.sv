@@ -5,48 +5,26 @@
 
 typedef logic [31:0] ThirtyTwoInput;
 
-module ThirtyTwoByThirtyTwoMux(cam_interface.dut_thirtyTwoByThirtyTwo d);
-   
-   generate
-      for(genvar iter=0;iter<32;iter++)begin
-	 ThirtyTwoToOneMux muxArray(
-				    .input_lines(
-						 {d.thirtyTwoByThirtyTwo_input_lines[31][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[30][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[29][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[28][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[27][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[26][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[25][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[24][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[23][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[22][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[21][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[20][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[19][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[18][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[17][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[16][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[15][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[14][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[13][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[12][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[11][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[10][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 9][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 8][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 7][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 6][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 5][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 4][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 3][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 2][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 1][iter],
-						  d.thirtyTwoByThirtyTwo_input_lines[ 0][iter]
-	                                          }),
-				    .selector_bits(d.thirtyTwoByThirtyTwo_selector_bits),
-				    .output_line(d.thirtyTwoByThirtyTwo_output_line[iter]));
-      end
-   endgenerate
+module ThirtyTwoByThirtyTwoMux(input ThirtyTwoInput [31:0] data_i, 
+	input [4:0] selector_bits,
+	output logic[31:0] data_o);
+
+	generate
+	   for(genvar iter=0;iter<32;iter++)begin
+	      ThirtyTwoToOneMux muxArray(
+					 .input_lines(
+	{data_i[31][iter], data_i[30][iter], data_i[29][iter], data_i[28][iter],
+	 data_i[27][iter], data_i[26][iter], data_i[25][iter], data_i[24][iter],
+	 data_i[23][iter], data_i[22][iter], data_i[21][iter], data_i[20][iter],
+	 data_i[19][iter], data_i[18][iter], data_i[17][iter], data_i[16][iter],
+	 data_i[15][iter], data_i[14][iter], data_i[13][iter], data_i[12][iter],
+	 data_i[11][iter], data_i[10][iter], data_i[ 9][iter], data_i[ 8][iter],
+	 data_i[ 7][iter], data_i[ 6][iter], data_i[ 5][iter], data_i[ 4][iter],
+	 data_i[ 3][iter], data_i[ 2][iter], data_i[ 1][iter], data_i[ 0][iter]
+	                                               }),
+					 .selector_bits(selector_bits),
+					 .output_line(data_o[iter]));
+	   end
+	endgenerate
 
 endmodule	 
