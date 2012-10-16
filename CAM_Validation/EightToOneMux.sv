@@ -10,8 +10,7 @@ module EightToOneMux(cam_interface.dut_eightToOne d);
    logic muxZeroOut;
    logic muxOneOut;
 
-   FourToOneMux mux0(
-		     .input_lines(d.eightToOne_input_lines[3:0]),
+   FourToOneMux mux0(   .input_lines(d.eightToOne_input_lines[3:0]),
 		     .selector_bits(d.eightToOne_selector_bits[1:0]),
 		     .output_line(muxZeroOut));
 

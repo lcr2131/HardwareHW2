@@ -141,11 +141,11 @@ interface cam_interface(input bit clk);
 
    modport dut_decoder(input decoder_write_enable_i, input decoder_write_index_i, output decoder_write_enable_o);
    
-   modport dut_eightToOne(input eightToOne_input_lines, input eightToOne_selector_bits, output eightToOne_output_line);
-   
    modport dut_priorityEncoder(input priorityEnc_data_i, output priorityEnc_data_o, output priorityEnc_valid_o);
    
    modport dut_fourToOne(input fourToOne_input_lines, input fourToOne_selector_bits, output fourToOne_output_line);
+
+   modport dut_eightToOne(input eightToOne_input_lines, input eightToOne_selector_bits, output eightToOne_output_line);  
    
    modport dut_thirtyTwoToOne(input thirtyTwoToOne_input_lines, input thirtyTwoToOne_selector_bits, output thirtyTwoToOne_output_line);
    
@@ -175,8 +175,6 @@ interface cam_interface(input bit clk);
    
 		   );
 
-   
-   
    
    modport bench_cam(clocking cb);
 
