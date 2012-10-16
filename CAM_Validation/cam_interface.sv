@@ -145,7 +145,7 @@ interface cam_interface(input bit clk);
    
    modport dut_fourToOne(input fourToOne_input_lines, input fourToOne_selector_bits, output fourToOne_output_line);
 
-   modport dut_eightToOne(input eightToOne_input_lines, input eightToOne_selector_bits, output eightToOne_output_line);  
+   modport dut_eightToOne(input eightToOne_input_lines, input eightToOne_selector_bits, output eightToOne_output_line);
    
    modport dut_thirtyTwoToOne(input thirtyTwoToOne_input_lines, input thirtyTwoToOne_selector_bits, output thirtyTwoToOne_output_line);
    
