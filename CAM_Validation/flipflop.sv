@@ -4,16 +4,16 @@
 // Date Modified: October 1, 2012
 
 module flipflop
-(
-    input 	 clk,
-    input 	 reset, 
-    input 	 data_i,
-    input 	 write_enable_i,
-    input 	 search_enable_i,
-    input 	 search_i,
-    output reg 	 data_o,
-    output logic match_o
-);
+  (
+   input 	clk,
+   input 	reset, 
+   input 	data_i,
+   input 	write_enable_i,
+   input 	search_enable_i,
+   input 	search_i,
+   output reg 	data_o,
+   output logic match_o
+   );
 
    always_ff @(posedge clk) begin
       if (reset) data_o <= '0;
@@ -23,6 +23,6 @@ module flipflop
    always_comb begin
       match_o = search_enable_i & (search_i == data_o);
    end
-  
+   
 endmodule
 

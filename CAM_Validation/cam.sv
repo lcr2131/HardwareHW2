@@ -8,9 +8,9 @@ module cam  (cam_interface.dut_cam d);
    wire [4 : 0 ] 	read_index;
    wire [4 : 0] 	dec_write_enable;
    
-   typedef logic [31:0] 	ThirtyTwoInput;
+   typedef logic [31:0] ThirtyTwoInput;
    ThirtyTwoInput [WIDTH - 1 : 0] row_out_into_mux;
-  
+   
    wire [4 : 0 ] 	selector_bits;
    wire [31 : 0] 	input_line;
    

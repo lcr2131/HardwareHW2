@@ -4,7 +4,7 @@
 // Date Modified: October 14, 2012
 
 module FourToOneMux(cam_interface.dut_fourToOne d);
-	
+   
    always_comb begin
       case (d.FourToOne_selector_bits)
 	2'b00: d.fourToOne_output_line = d.fourToOne_input_lines[0];

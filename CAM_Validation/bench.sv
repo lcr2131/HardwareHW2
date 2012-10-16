@@ -48,7 +48,7 @@ class cam_env;
 	 //If Conditionals To Set Stuff
          //End Ifs
       end // End While
-    endfunction // configure  
+   endfunction // configure  
 
 endclass // cam_env
 
@@ -106,17 +106,17 @@ class search;
 
 
 
-         endfunction //
+   endfunction //
 
    function void checkbits;
 
 
 
-         endfunction //
+   endfunction //
 
 endclass // search
 
-   
+
 program testbench ();
    
    
@@ -130,10 +130,10 @@ program testbench ();
 
       end // end repeat
    end // end initial
- 
+   
    
 endprogram 
    
-     
+   
    
    
