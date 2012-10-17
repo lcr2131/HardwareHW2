@@ -1,7 +1,7 @@
 interface cam_interface(input bit clk);
 
    //full cam
-   logic 			clk_i; 
+  // logic 			clk_i; 
    logic 			rst_i;
    logic 			read_enable_i; 
    logic [4 : 0 ] 		read_index_i;
@@ -18,8 +18,8 @@ interface cam_interface(input bit clk);
   
 
    clocking cb @(posedge clk);
-      output 			clk_i,
-		 		rst_i,
+      //output 			clk_i,
+      output		 	rst_i,
 		 		read_enable_i, 
 				read_index_i,
 				write_enable_i,
@@ -39,7 +39,7 @@ interface cam_interface(input bit clk);
 
    modport dut_cam    	
      (
-      input  clk_i, 
+      //input  clk_i, 
       input  rst_i,
       input  read_enable_i, 
       input  read_index_i,
