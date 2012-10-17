@@ -1,7 +1,7 @@
 // Author: Leonard Robinson
 // Module: cam.sv
 // Date Created: September 25, 2012
-// Date Modified: October 2, 2012
+// Date Modified: October 16, 2012
 
 module cam  (cam_interface.dut_cam d);   
    //Put inputs on wires inside of the CAM
@@ -40,7 +40,7 @@ module cam  (cam_interface.dut_cam d);
       d.read_valid_o = readlogic[read_index_i];
    end
 
-   ThirtyTwoByThirtyTwoMux mux(.data_i(row_out_into_mux),.selector_bits(read_index_i),.data_o(read_value_o) );
+   ThirtyTwoByThirtyTwoMux mux(.data_i(row_out_into_mux),.selector_bits(read_index_i),.data_o(d.read_value_o) );
    
    
    //Search Functionality - P.E.
