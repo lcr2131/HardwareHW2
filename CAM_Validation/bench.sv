@@ -1,5 +1,5 @@
-//Author:
-//Name:
+//Author:Donald Pomeroy
+//Name: bench.sv
 //Date Created:Saturday October 13, 2012
 //Date Modified:
 
@@ -13,10 +13,7 @@ class cam_transaction;
 	rand bit read_enable;
 	rand int read_address;
 
-	bit read_valid;
-   	int read_value;
-   	bit search_valid;
-   	int search_index;
+	
    
 
 endclass // cam_transaction
@@ -80,13 +77,13 @@ endclass // cam_test
 class cam_env;
 
    int cycle = 0;
-   int max_transactions;
-   int warmup_time;
+   int max_transactions=10000;
+   int warmup_time=2;
    float reset_density;
    float search_density;
    float write_density;
    float read_density;
-   bit verbose;
+   bit verbose=1;
    
    
    function configure(string filename);
@@ -95,8 +92,17 @@ class cam_env;
       file = $fopen(filename, "r");
       while(!$feof(file)) begin
 	 chars_returned = $fscanf(file, "%s %d", param, value);
-	 //If Conditionals To Set Stuff
-         //End Ifs
+	 if ("RANDOM_SEED" == param) begin
+                seed = value;
+                $srandom(seed);
+            end
+            else if("TRANSACTIONS" == param) begin
+                max_transactions = value;
+            end
+            else begin
+                $display("Never heard of a: %s", param);
+                $exit();
+            end		 
       end // End While
    endfunction // configure  
 
