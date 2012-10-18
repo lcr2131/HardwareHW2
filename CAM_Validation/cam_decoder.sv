@@ -4,21 +4,15 @@
 // Date Modified: October 2, 2012
 
 
-module cam_decoder #(parameter WIDTH = 32,
-		     parameter ADDR_WIDTH = 5,
-	             parameter DEPTH = (1<<ADDR_WIDTH)
-		    )
-   //End Parameter Defs
-   (
-    input 			write_enable_i,
-    input [ADDR_WIDTH - 1 : 0] 	write_index_i,
-    output logic [DEPTH - 1 :0 ] write_enable_o
+module cam_decoder (    input 			write_enable_i,
+			input [4: 0] 	      write_index_i,
+			output logic [31 :0 ] write_enable_o
     );
 
-   logic [DEPTH -1 : 0] 	en_addr_write;//Enabled Address Write
+   logic [31: 0] 	en_addr_write;//Enabled Address Write
    
    always_comb begin      
-	for(int iter = 0; iter < DEPTH; iter++) begin
+	for(int iter = 0; iter < 32; iter++) begin
 		en_addr_write[iter] = (iter == write_index_i);
 		write_enable_o[iter] = en_addr_write[iter] & write_enable_i;
 	end // end for
