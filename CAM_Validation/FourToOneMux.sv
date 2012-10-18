@@ -7,7 +7,7 @@ module FourToOneMux(
 		    input [3:0]  input_lines,
 		    input [1:0]  selector_bits,
 		    output logic output_line);
-	
+   
    always_comb begin
       case (selector_bits)
 	2'b00: output_line = input_lines[0];

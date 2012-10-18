@@ -44,26 +44,26 @@ class cam_test;
 	 end
       end
    endfunction;
-	
+   
    function void rw_golden_result;
-	if(write_enable==1) begin
-	 	if((write_address < 32) & (write_address>-1)) begin
-	    		map[write_address] = write_data;
-	    		validity_map[write_address] = 1;
-	 	end
-      	end
+      if(write_enable==1) begin
+	 if((write_address < 32) & (write_address>-1)) begin
+	    map[write_address] = write_data;
+	    validity_map[write_address] = 1;
+	 end
+      end
 
       if(read_enable==1) begin
-	 	if((read_address < 32) & (read_address>-1)) begin
-	    		read_value = map[read_address];
-	    		read_valid = validity_map[read_address];
-	 	end
-	 	else begin
-	    		read_valid = 0;
-	 	end
+	 if((read_address < 32) & (read_address>-1)) begin
+	    read_value = map[read_address];
+	    read_valid = validity_map[read_address];
+	 end
+	 else begin
+	    read_valid = 0;
+	 end
       end
    endfunction
-      
+   
 
    function void search_golden_result;
       search_valid = 0;		
@@ -126,7 +126,7 @@ class cam_env;
 	 end
 	 else if("INDEX_MASK_READ" == param) begin
 	    // $sscanf(value, "%x", index_mask_read);
-	    // TODO
+	    // TODO 
 	 end
 	 else if("INDEX_MASK_WRITE" == param) begin
 	    // TODO
@@ -188,6 +188,8 @@ program testbench (cam_interface.bench cam_tb);
    int cycle;
 
    task do_cycle;
+      //TODO - Include BitMasks? IE bitwise And of Functions.  Does
+      // this need its own function in the packet class?
       
       env.cycle++;
       
@@ -233,16 +235,16 @@ program testbench (cam_interface.bench cam_tb);
 	 // only check this result if read_enable is set
 	 if (packet.read_enable) begin
 	    check.bit_check_result(
-				  cam_tb.cb.read_valid_o,
-				  test.read_valid,
-				  env.verbose, "read_valid"
-				 );
+				   cam_tb.cb.read_valid_o,
+				   test.read_valid,
+				   env.verbose, "read_valid"
+				   );
 	    if (test.read_valid) begin
 	       check.int_check_result(
 				      cam_tb.cb.read_value_o,
 				      test.read_value,
 				      env.verbose, "read_value"
-				     );
+				      );
 	    end
 	 end
 

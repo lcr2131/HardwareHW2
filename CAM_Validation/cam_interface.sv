@@ -1,7 +1,7 @@
 interface cam_interface(input bit clk);
 
    //full cam
-  // logic 			clk_i; 
+   // logic 			clk_i; 
    logic 			rst_i;
    logic 			read_enable_i; 
    logic [4 : 0 ] 		read_index_i;
@@ -15,7 +15,7 @@ interface cam_interface(input bit clk);
    logic 			search_valid_o;
    logic [4 : 0 ] 		search_index_o;
 
-  
+   
 
    clocking cb @(posedge clk);
       //output 			clk,
@@ -55,10 +55,6 @@ interface cam_interface(input bit clk);
       ); 
 
    
-   
-
-
-
    
    modport bench(clocking cb);
 
