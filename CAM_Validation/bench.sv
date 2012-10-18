@@ -52,8 +52,6 @@ class cam_test;
 	    		validity_map[write_address] = 1;
 	 	end
       	end
-	endfunction
-
 
       if(read_enable==1) begin
 	 	if((read_address < 32) & (read_address>-1)) begin
@@ -64,8 +62,7 @@ class cam_test;
 	    		read_valid = 0;
 	 	end
       end
-
-
+   endfunction
       
 
    function void search_golden_result;
@@ -234,12 +231,34 @@ program testbench (cam_interface.bench cam_tb);
          do_cycle();
 
 	 // only check this result if read_enable is set
-         if(test.read_enable & (check.bit_check_result(cam_tb.cb.read_valid_o,test.read_valid,env.verbose,"read_valid")==1)) begin
-	    check.int_check_result(cam_tb.cb.read_value_o, test.read_value, env.verbose,"read_value");
+	 if (packet.read_enable) begin
+	    check.bit_check_result(
+				  cam_tb.cb.read_valid_o,
+				  test.read_valid,
+				  env.verbose, "read_valid"
+				 );
+	    if (test.read_valid) begin
+	       check.int_check_result(
+				      cam_tb.cb.read_value_o,
+				      test.read_value,
+				      env.verbose, "read_value"
+				     );
+	    end
 	 end
 
-	 if(check.bit_check_result(cam_tb.cb.search_valid_o,test.search_valid,env.verbose,"search_valid")==1) begin
-	    check.int_check_result(cam_tb.cb.search_index_o, test.search_index, env.verbose, "search_index");
+	 if (packet.search_enable) begin
+	    check.bit_check_result(
+				   cam_tb.cb.search_valid_o,
+				   test.search_valid,
+				   env.verbose, "search_valid"
+				   );
+	    if (test.search_valid) begin
+	       check.int_check_result(
+				      cam_tb.cb.search_index_o,
+				      test.search_index,
+				      env.verbose, "search_index"
+				      );
+	    end
 	 end			
       end
    end
