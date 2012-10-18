@@ -4,13 +4,13 @@
 //Date Modified:
 
 class cam_transaction;
-	rand bit reset;
-	rand bit search_enable;
+	     bit reset;
+	     bit search_enable;
 	rand int search_data;
-	rand bit write_enable;
+	     bit write_enable;
 	rand int write_data;
 	rand int write_address;
-	rand bit read_enable;
+             bit read_enable;
 	rand int read_address;
 
 	
@@ -37,7 +37,7 @@ class cam_test;
 
 	function void reset_golden_result;
 		if(reset == 1) begin
-			for(i=0;i<32;i=i+1) begin
+			for(int i=0;i<32;i=i+1) begin
 				map[i]=0;
 			end
 		end
@@ -48,8 +48,9 @@ class cam_test;
 			if((read_address < 32) & (read_address>-1)) begin
 				read_value = map[read_address];
 				read_valid = 1;
+		        end
 			else begin
-				read_valid==0;	
+				read_valid = 0;	
 			end
 		end
 
@@ -63,11 +64,12 @@ class cam_test;
 	function void search_golden_result;
 		search_valid = 0;		
 		if(search_enable==1) begin
-			for(i=0;i<32;i=i+1)
-				if(map[i]==search_data) 
+			for(int i=0;i<32;i=i+1) begin
+				if(map[i]==search_data) begin
 					search_valid = 1;
 					search_index = i;					
 					break;
+				end
 			end
 		end
 	endfunction
@@ -79,30 +81,62 @@ class cam_env;
    int cycle = 0;
    int max_transactions=10000;
    int warmup_time=2;
-   float reset_density;
-   float search_density;
-   float write_density;
-   float read_density;
+   real reset_density = 0.5;
+   real search_density = 0.5;
+   real write_density = 0.5;
+   real read_density = 0.5;
    bit verbose=1;
+   int seed;
    
    
    function configure(string filename);
-      int file, value, seed, chars_returned;
-      string param;
+      int file, chars_returned;
+      string param, value;
       file = $fopen(filename, "r");
       while(!$feof(file)) begin
-	 chars_returned = $fscanf(file, "%s %d", param, value);
+	 chars_returned = $fscanf(file, "%s %s", param, value);
 	 if ("RANDOM_SEED" == param) begin
-                seed = value;
-                $srandom(seed);
-            end
-            else if("TRANSACTIONS" == param) begin
-                max_transactions = value;
-            end
-            else begin
-                $display("Never heard of a: %s", param);
-                $exit();
-            end		 
+            $sscanf(value, "%d", seed);
+            $srandom(seed);
+	    $display("Random number generator seeded to %d", seed);
+         end
+         else if("TRANSACTIONS" == param) begin
+            $sscanf(value, "%d", max_transactions);
+	    $display("Maximum transactions to test: %d", max_transactions);
+         end
+	 else if("RESET_DENSITY" == param) begin
+            $sscanf(value, "%f", reset_density);
+	    $display("Reset density: %f", reset_density);
+	 end
+	 else if("READ_DENSITY" == param) begin
+            $sscanf(value, "%f", read_density);
+	    $display("Read density: %f", read_density);
+	 end
+	 else if("WRITE_DENSITY" == param) begin
+            $sscanf(value, "%f", write_density);
+	    $display("Write density: %f", write_density);
+	 end
+	 else if("SEARCH_DENSITY" == param) begin
+            $sscanf(value, "%f", search_density);
+	    $display("Search density: %f", search_density);
+	 end
+	 else if("INDEX_MASK_READ" == param) begin
+	    // $sscanf(value, "%x", index_mask_read);
+	    // TODO
+	 end
+	 else if("INDEX_MASK_WRITE" == param) begin
+	    // TODO
+	 end
+	 else if ("DATA_MASK_SEARCH" == param) begin
+	    // TODO
+	 end
+	 else if ("DATA_MASK_WRITE" == param) begin
+	    // TODO
+	 end
+         else begin
+            $display("Never heard of a: %s", param);
+            $exit();
+         end		 
       end // End While
    endfunction // configure  
 
@@ -143,7 +177,7 @@ class cam_checker;
 endclass 
 
 
-program testbench (cam_interface.bench_cam cam_tb);
+program testbench (cam_interface.bench cam_tb);
    
 	cam_transaction packet;
   	cam_test test;
@@ -151,12 +185,19 @@ program testbench (cam_interface.bench_cam cam_tb);
 	cam_env env;
 	int cycle;
 
-	task do_cycle
-		env.cycle++;
-		cycle = env.cycle;
+   task do_cycle;
+      
+      env.cycle++;
+      
 		cycle = env.cycle;
        		packet = new();
         	packet.randomize();
+	   packet.read_enable = ($dist_uniform(env.seed, 0, 1) < env.read_density);
+	   packet.write_enable = ($dist_uniform(env.seed, 0, 1) < env.write_density);
+	   packet.reset = ($dist_uniform(env.seed, 0, 1) < env.reset_density);
+	   packet.search_enable = ($dist_uniform(env.seed, 0, 1) < env.search_density);
+	   
+	   
 		cam_tb.cb.rst_i <= packet.reset;
 		cam_tb.cb.read_enable_i <= packet.read_enable; 
 		cam_tb.cb.read_index_i <= packet.read_address;
@@ -187,12 +228,12 @@ program testbench (cam_interface.bench_cam cam_tb);
         	repeat (env.max_transactions) begin
             		do_cycle();
 
-            		if(checker.bit_check_result(ds.cb.read_valid_o,test.read_valid,env.verbose)==1) begin
-				checker.int_check_result(ds.cb.read_value_o, test.read_value, env.verbose);
+            		if(check.bit_check_result(cam_tb.cb.read_valid_o,test.read_valid,env.verbose)==1) begin
+				check.int_check_result(cam_tb.cb.read_value_o, test.read_value, env.verbose);
 			end
 
-			if(checker.bit_check_result(ds.cb.search_valid_o,test.search_valid,env.verbose)==1) begin
-				checker.int_check_result(ds.cb.search_index_o, test.search_index, env.verbose);
+			if(check.bit_check_result(cam_tb.cb.search_valid_o,test.search_valid,env.verbose)==1) begin
+				check.int_check_result(cam_tb.cb.search_index_o, test.search_index, env.verbose);
 			end			
         	end
 	end

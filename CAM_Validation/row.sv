@@ -24,7 +24,7 @@ module row #(parameter WIDTH=32)
    end
    
    generate 
-      for (genvar j = 0; j < WIDTH; j++) begin
+      for (genvar j = 0; j < WIDTH; j++) begin : genblock_bits
          flipflop membit(.clk,
 			 .reset,
                          .data_i(data_i[j]),

@@ -18,7 +18,7 @@ interface cam_interface(input bit clk);
   
 
    clocking cb @(posedge clk);
-      //output 			clk_i,
+      //output 			clk,
       output		 	rst_i,
 		 		read_enable_i, 
 				read_index_i,
@@ -37,9 +37,9 @@ interface cam_interface(input bit clk);
 
    
 
-   modport dut_cam    	
+   modport dut    	
      (
-      //input  clk_i, 
+      input  clk, 
       input  rst_i,
       input  read_enable_i, 
       input  read_index_i,
@@ -60,7 +60,7 @@ interface cam_interface(input bit clk);
 
 
    
-   modport bench_cam(clocking cb);
+   modport bench(clocking cb);
 
 endinterface
 

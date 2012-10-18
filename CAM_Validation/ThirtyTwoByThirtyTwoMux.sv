@@ -10,7 +10,7 @@ module ThirtyTwoByThirtyTwoMux(input ThirtyTwoInput [31:0] data_i,
 	output logic[31:0] data_o);
 
 	generate
-	   for(genvar iter=0;iter<32;iter++)begin
+	   for(genvar iter=0;iter<32;iter++)begin : genblock_muxes
 	      ThirtyTwoToOneMux muxArray(
 					 .input_lines(
 	{data_i[31][iter], data_i[30][iter], data_i[29][iter], data_i[28][iter],

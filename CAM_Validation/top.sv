@@ -12,8 +12,8 @@ module top();
    initial $vcdpluson;
 
    cam_interface IFC(clk); // instantiate the interface file
-   cam_module dut(IFC.dut);
-   tb bench(IFC.bench);
+   cam dut(IFC.dut);
+   testbench bench(IFC.bench);
    
 
 
