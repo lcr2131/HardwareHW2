@@ -1,8 +1,13 @@
 This is a readme detailing the information required by the problem statement.
 
  
-3. Lines of Code = 
+3. Lines of Code =
+18 Lines Involving Reset Functionality Alone.  We had no problems with our reset function. 
+
 4. Lines of Code =
+Our read function initially had problems with written states (X's)
+Our write function did not work after our interface incorporation
+
 5. Lines of Code =
 6. Lines of Code =
 7. Lines of Code =
