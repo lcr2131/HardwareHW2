@@ -44,26 +44,29 @@ class cam_test;
 	 end
       end
    endfunction;
-
+	
    function void rw_golden_result;
+	if(write_enable==1) begin
+	 	if((write_address < 32) & (write_address>-1)) begin
+	    		map[write_address] = write_data;
+	    		validity_map[write_address] = 1;
+	 	end
+      	end
+	endfunction
+
+
       if(read_enable==1) begin
-	 if((read_address < 32) & (read_address>-1)) begin
-	    read_value = map[read_address];
-	    read_valid = validity_map[read_address];
-	 end
-	 else begin
-	    read_valid = 0;
-	 end
+	 	if((read_address < 32) & (read_address>-1)) begin
+	    		read_value = map[read_address];
+	    		read_valid = validity_map[read_address];
+	 	end
+	 	else begin
+	    		read_valid = 0;
+	 	end
       end
 
 
-      if(write_enable==1) begin
-	 if((write_address < 32) & (write_address>-1)) begin
-	    map[write_address] = write_data;
-	    validity_map[write_address] = 1;
-	 end
-      end
-   endfunction
+      
 
    function void search_golden_result;
       search_valid = 0;		
