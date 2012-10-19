@@ -91,8 +91,10 @@ class cam_env;
    real read_density = 0.5;
    bit 	verbose=1;
    int 	seed;
-   
-   
+   bit [3:0] index_mask; // Basic Mask for Everythang
+   bit [31:0]  data_mask;
+	
+     
    function configure(string filename);
       int file, chars_returned;
       string param, value;
@@ -129,13 +131,18 @@ class cam_env;
 	    // TODO 
 	 end
 	 else if("INDEX_MASK_WRITE" == param) begin
+	    $sscanf(value, "%x", index_mask); 
+	    $display("Index Mask: %f", index_mask);
+	    
 	    // TODO
 	 end
 	 else if ("DATA_MASK_SEARCH" == param) begin
 	    // TODO
 	 end
 	 else if ("DATA_MASK_WRITE" == param) begin
-	    // TODO
+	    $sscanf(value, "%x", data_mask);
+	    $display("Data Mask: %f", data_mask);
+	    
 	 end
          else begin
             $display("Never heard of a: %s", param);
@@ -206,8 +213,11 @@ program testbench (cam_interface.bench cam_tb);
       cam_tb.cb.read_enable_i <= packet.read_enable; 
       cam_tb.cb.read_index_i <= packet.read_address;
       cam_tb.cb.write_enable_i <= packet.write_enable;
-      cam_tb.cb.write_index_i <= packet.write_address;
-      cam_tb.cb.write_data_i <= packet.write_data;
+      cam_tb.cb.write_index_i <= packet.write_address&env.index_mask;
+      $display("Write (Value, Address) : (%d , %d) ", packet.write_data&env.data_mask, packet.write_address&env.index_mask);
+
+      
+      cam_tb.cb.write_data_i <= packet.write_data&env.data_mask;
       cam_tb.cb.search_enable_i <= packet.search_enable;
       cam_tb.cb.search_data_i <= packet.search_data;	
       @(cam_tb.cb);
