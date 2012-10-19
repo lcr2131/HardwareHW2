@@ -1,15 +1,49 @@
+
 This is a readme detailing the information required by the problem statement.
 
- 
-3. Lines of Code =
-18 Lines Involving Reset Functionality Alone.  We had no problems with our reset function. 
 
-4. Lines of Code =
+We had extensive problems with the interface between the test bench and design under test.  Our values were not reading from any of our data ports, however we knew that they should be.
+
+3. Lines of Code = 
+We had some problems in the validation skeleton with object references, and a general class overload.  We made the design decision to split the tranaction and test classes for readability, however t\
+his carried over into a more complex test bench class than may have been optimal for our small test case.
+
+4. Makefile  Lines of Code = 44
+
+We had no problems writing the make file.  Our interface compiled perfectly as well.
+
+5. Lines of Code = 18 Lines Involving Reset Functionality Alone.
+We knew our reset worked from the outset, however testing this value can be difficult as most of the data ports may read 0 after the first iteration without any read or write functions, and knowing \
+whether the values were actually resetting and resetting on time is a hard thing to judge without read functionality.
+
+6. Lines of Code =
 Our read function initially had problems with written states (X's)
 Our write function did not work after our interface incorporation
 
-5. Lines of Code =
-6. Lines of Code =
 7. Lines of Code =
+Our search functionality had validity problems from the onset, since if the number you happened to be searching for was zero, it was possible to return a valid location with an invalid return value.
+
 8. Lines of Code =
+Writing the bit masks presented another problem.  At first, it seemed we needed them to test the functionality of the read and write method, making gradual testing extremely difficult on the large n\
+umber of interfaces we were implementing.  It was a problem with comfort with the verilog c-style coding base.  We were not sure of the actual input method for our bit mask, as well as the conversio\
+n.  The first time we attempted to implement the bit masks, we encountered strange error and inappropriate masking.
+We ended up using constraints on our integer data values and addresses to check the functionality of our read, write and search functions, in addition to the bit masks in order to test more accurate\
+ly our outputs.
+
+
+
+
+
+
+
+
+
+
 9. Lines of Code =
+
+
+
+
+
+
+
