@@ -216,7 +216,7 @@ program testbench (cam_interface.bench cam_tb);
       test.reset <= packet.reset;
       test.read_enable <= packet.read_enable;
       test.read_address <= packet.read_address;
-      test.read_index <= packet.read_address;
+      test.read_address <= packet.read_address;
       test.write_enable <= packet.write_enable;
       test.write_data <= packet.write_data&env.index_mask;   
       test.search_enable <= packet.search_enable;
