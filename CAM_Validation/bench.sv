@@ -13,9 +13,6 @@ class cam_transaction;
    bit read_enable;
    rand int read_address;
 
-   
-   
-
 endclass // cam_transaction
 
 class cam_test;
@@ -195,9 +192,7 @@ program testbench (cam_interface.bench cam_tb);
    int cycle;
 
    task do_cycle;
-      //TODO - Include BitMasks? IE bitwise And of Functions.  Does
-      // this need its own function in the packet class?
-      
+          
       env.cycle++;
       
       cycle = env.cycle;
@@ -207,15 +202,13 @@ program testbench (cam_interface.bench cam_tb);
       packet.write_enable = ($dist_uniform(env.seed, 0, 1) < env.write_density);
       packet.reset = ($dist_uniform(env.seed, 0, 1) < env.reset_density);
       packet.search_enable = ($dist_uniform(env.seed, 0, 1) < env.search_density);
-      
-      
+
       cam_tb.cb.rst_i <= packet.reset;
       cam_tb.cb.read_enable_i <= packet.read_enable; 
       cam_tb.cb.read_index_i <= packet.read_address;
       cam_tb.cb.write_enable_i <= packet.write_enable;
       cam_tb.cb.write_index_i <= packet.write_address&env.index_mask;
       $display("Write (Value, Address) : (%d , %d) ", packet.write_data&env.data_mask, packet.write_address&env.index_mask);
-
       
       cam_tb.cb.write_data_i <= packet.write_data&env.data_mask;
       cam_tb.cb.search_enable_i <= packet.search_enable;
