@@ -4,8 +4,7 @@
 // Date Modified: October 16, 2012
 
 module cam  (cam_interface.dut d);   
-   //Put inputs on wires inside of the CAM
-   //   wire [4 : 0 ] 	read_index;
+
    wire [31 : 0] 	dec_write_enable;
    
    typedef logic [31:0] ThirtyTwoInput;
@@ -45,8 +44,8 @@ module cam  (cam_interface.dut d);
    
    //Search Functionality - P.E.
    logic matchfound;
-   priority_encoder priority_en(.data_i(match),.data_o(d.search_index_o),.valid_o(matchfound));
-   assign d.search_valid_o = d.search_enable_i & matchfound;
+   priority_encoder priority_en(.data_i(match),.data_o(d.search_index_o),.valid_o(d.search_valid_o));
+//   assign d.search_valid_o = d.search_enable_i & matchfound;
    
    
 endmodule // cam
