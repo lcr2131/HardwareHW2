@@ -8,10 +8,18 @@ class cam_transaction;
    bit search_enable;
    rand int search_data;
    bit write_enable;
+
    rand int write_data;
    rand int write_address;
    bit read_enable;
    rand int read_address;
+
+   constraint zeroToThirtyOne{
+	write_address>=0;
+	write_address<32;
+	read_address>=0;
+	read_address<32;	
+   }
 
 endclass // cam_transaction
 
@@ -203,6 +211,17 @@ program testbench (cam_interface.bench cam_tb);
       packet.reset = ($dist_uniform(env.seed, 0, 1) < env.reset_density);
       packet.search_enable = ($dist_uniform(env.seed, 0, 1) < env.search_density);
 
+
+
+      test.reset <= packet.reset;
+      test.read_enable <= packet.read_enable;
+      test.read_address <= packet.read_address;
+      test.read_index <= packet.read_address;
+      test.write_enable <= packet.write_enable;
+      test.write_data <= packet.write_data&env.index_mask;   
+      test.search_enable <= packet.search_enable;
+      test.search_data <= packet.search_data;    
+
       cam_tb.cb.rst_i <= packet.reset;
       cam_tb.cb.read_enable_i <= packet.read_enable; 
       cam_tb.cb.read_index_i <= packet.read_address;
@@ -270,6 +289,7 @@ program testbench (cam_interface.bench cam_tb);
    
    
 endprogram 
+
    
    
    
