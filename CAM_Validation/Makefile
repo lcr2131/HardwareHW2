@@ -33,5 +33,12 @@ test:
 #	vcs -PP -sverilog +define+SV +define+VPD $() $()
 	./$(OUTPUT)
 
+view:
+	dve -full64 -vpd vcdplus.vpd & 
+
+gtkwave:
+	vcs -vpd2vcd vcdplus.vpd waveform.vcd
+	gtkwave waveform.vcd &
+
 clean:
 	rm -rf *~ csrc *.exe.daidir *.exe *.log *.inf .leda_work *.key *.vpd *.vcd DVEfiles
